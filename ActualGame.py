@@ -27,7 +27,6 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 TEXTSURFACE = font.render('THESE ARE BEANS!!!!!!!!', False, (0, 0, 0))
 TEXTSURFACE2 = font.render('THERE ARE EVEN MORE BEANS!!!', False, BLACK)
 TEXTSURFACE3 = font.render('THE TEXT IS WHITE NOW', False, WHITE)
-RECT_TEXT_1 = pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 50), TEXTSURFACE.get_size()), 2)
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop
@@ -53,7 +52,18 @@ while not done:
     SCREEN.blit(TEXTSURFACE, (0, 50))
     SCREEN.blit(TEXTSURFACE2, (0, 100))
     SCREEN.blit(TEXTSURFACE3, (170, 200))
-    pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 50), TEXTSURFACE.get_size()))
+    if select == 1:
+      pygame.draw.rect(SCREEN_SURFACE, WHITE, pygame.Rect((0, 50), TEXTSURFACE.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 100), TEXTSURFACE2.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((170, 200), TEXTSURFACE3.get_size()),2)
+    if select == 2:
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 50), TEXTSURFACE.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, WHITE, pygame.Rect((0, 100), TEXTSURFACE2.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((170, 200), TEXTSURFACE3.get_size()),2)
+    if select == 3:
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 50), TEXTSURFACE.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 100), TEXTSURFACE2.get_size()),2)
+      pygame.draw.rect(SCREEN_SURFACE, WHITE, pygame.Rect((170, 200), TEXTSURFACE3.get_size()),2)
     # --- Drawing code should go here
 
     # --- Go ahead and update the screen with what we've drawn.
