@@ -1,11 +1,18 @@
 import pygame
-
+import os
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 select = 1
+
+games = 'C:\Users\pc\game\games'
+
+f = ( games,'r')
+
+for file in f:
+  print(file)
 
 pygame.init()
 
@@ -15,7 +22,7 @@ SCREEN = pygame.display.set_mode(SIZE)
 
 pygame.display.set_caption("BEANS")
 
-SCREEN_SURFACE = pygame.image.load(r"C:\Users\pc\Desktop\BEANS.jpg")
+SCREEN_SURFACE = pygame.image.load(r"C:\Users\pc\game\BEANS.jpg")
 
 # Loop until the user clicks the close button.
 done = False
