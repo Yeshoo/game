@@ -20,7 +20,7 @@ pygame.init()
 SIZE = (700, 500)
 SCREEN = pygame.display.set_mode(SIZE)
 
-pygame.display.set_caption("BEANS")
+pygame.display.set_caption("BEANS ")
 
 SCREEN_SURFACE = pygame.image.load(r"C:\Users\pc\game\BEANS.jpg")
 
