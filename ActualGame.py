@@ -7,9 +7,11 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 select = 0
 
+cwd = '.\games'
+
 # The function that gets the names of all the games
 def get_dir_list():
-  return next(os.walk('.\games'))[1]
+  return next(os.walk(cwd))[1]
 print (get_dir_list())
 
 # The list of all our games
@@ -30,6 +32,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 font = pygame.font.SysFont('Comic Sans', 32)
+Description_font = pygame.font.SysFont('Arial', 16)
 
 # Creating the list of all the text surfaces that will be used
 TEXT_SURFACES = []
