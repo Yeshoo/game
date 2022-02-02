@@ -9,13 +9,33 @@ select = 0
 
 cwd = '.\games'
 
-# The function that gets the names of all the games
+# The functions that get the names and roots of all the games
 def get_dir_list():
   return next(os.walk(cwd))[1]
-print (get_dir_list())
 
-# The list of all our games
+def get_dir_root_list():
+  roots = []
+  for game in next(os.walk(cwd))[1]:
+    roots.append(os.path.join(cwd, game))
+  return roots
+
+def get_game_text_roots():
+  roots = []
+  for root in get_dir_root_list():
+    roots.append(os.path.join(root, 'text.txt'))
+  return roots
+
+def get_game_image_roots():
+  roots = []
+  for root in get_dir_root_list():
+    roots.append(os.path.join(root, 'image.png'))
+  return roots
+
+# The lists of all our games, their roots, etc...
 list_of_games = list((get_dir_list()))
+list_of_game_roots = list((get_dir_root_list()))
+list_of_game_text_root = list((get_game_text_roots()))
+list_of_game_image_roots = list((get_game_image_roots()))
 
 # Set the width and height of the screen [width, height]
 SIZE = (700, 500)
@@ -67,7 +87,7 @@ while not done:
         pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 100*i), TEXT_SURFACES[i].get_size()),2)
 
 
-    
+
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
