@@ -25,6 +25,12 @@ def get_game_text_roots():
     roots.append(os.path.join(root, 'text.txt'))
   return roots
 
+def get_game_python_script():
+  roots = []
+  for root in get_dir_root_list():
+    roots.append(os.path.join(root, "main.py"))
+  return roots
+
 def get_game_image_roots():
   roots = []
   for root in get_dir_root_list():
@@ -33,12 +39,16 @@ def get_game_image_roots():
 
 # The lists of all our games, their roots, etc...
 list_of_games = list((get_dir_list()))
+list_of_game_python_script = list((get_game_python_script()))
 list_of_game_roots = list((get_dir_root_list()))
 list_of_game_text_root = list((get_game_text_roots()))
 list_of_game_image_roots = list((get_game_image_roots()))
 
 # Set the width and height of the screen [width, height]
-SIZE = (700, 500)
+
+SCREEN_WIDTH = 1300
+SCREEN_HEIGHT = 700
+SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 SCREEN = pygame.display.set_mode(SIZE)
 
 pygame.display.set_caption("BEANS ")
@@ -57,9 +67,22 @@ Description_font = pygame.font.SysFont('Arial', 16)
 # Creating the list of all the text surfaces that will be used
 TEXT_SURFACES = []
 
+TEXT_DESCRIPTION_SURFACES = []
+
+GAME_IMAGE_SURFACES = []
+
 # Adding each a surface that will write each games name to the list
 for game in list_of_games:
   TEXT_SURFACES.append(font.render(game, True, BLACK))
+
+for desc in list_of_game_text_root:
+  f = open(desc, "rt")
+  text = f.read()
+  TEXT_DESCRIPTION_SURFACES.append(Description_font.render(text, True, BLACK))
+
+for img_root in list_of_game_image_roots:
+ GAME_IMAGE_SURFACES.append(pygame.image.load(img_root))
+  
 
 # -------- Main Program Loop -----------
 while not done:
@@ -73,9 +96,10 @@ while not done:
                 select = select - 1
             if event.key == pygame.K_DOWN and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
-
-    # above this, or they will be erased with this command.
-    SCREEN.blit(SCREEN_SURFACE, (0, 0))
+            if event.key == pygame.K_SPACE:
+               os.system("python ." + list_of_game_python_script[select][1:])
+    SCREEN.blit(SCREEN_SURFACE, (0, 0))\
+    
     
 
     # Drawing all the text surfaces and their borders according to the selected game
@@ -85,8 +109,8 @@ while not done:
         pygame.draw.rect(SCREEN_SURFACE, WHITE, pygame.Rect((0, 100*i), TEXT_SURFACES[i].get_size()),2)  
       else:
         pygame.draw.rect(SCREEN_SURFACE, BLACK, pygame.Rect((0, 100*i), TEXT_SURFACES[i].get_size()),2)
-
-
+    SCREEN.blit(TEXT_DESCRIPTION_SURFACES[select], (SCREEN_WIDTH/2,50))
+    SCREEN.blit(pygame.transform.scale(GAME_IMAGE_SURFACES[select], (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)),(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
 
 
     # --- Go ahead and update the screen with what we've drawn.
