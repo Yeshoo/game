@@ -100,7 +100,7 @@ while not done:
             if event.key == pygame.K_DOWN and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
             if event.key == pygame.K_SPACE:
-               os.system("python ." + list_of_game_python_script[select][1:])
+               os.system("python ." + list_of_game_python_script[select][1:] + 'main.py')
     SCREEN.blit(SCREEN_SURFACE, (0, 0))
     
     
