@@ -70,13 +70,12 @@ opponent_speed = 7
 player_score = 0
 opponent_score = 0
 basic_font = pygame.font.Font('freesansbold.ttf', 32)
-pong_sound = pygame.mixer.Sound("oh.mp3")
-score_sound = pygame.mixer.Sound("dead.mp3")
+playing = True
 
-while True:
+while playing:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
-			os.system("python .C:\Users\pc\game\ActualGame.py")
+			playing = False
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_UP:
 				player_speed -= 6
@@ -105,3 +104,4 @@ while True:
 
 	pygame.display.flip()
 	clock.tick(60)
+pygame.quit()
