@@ -8,6 +8,8 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 select = 0
 
+pygame.mixer.init
+
 cwd = '.\games'
 
 # The functions that get the names and roots of all the games
@@ -97,9 +99,12 @@ while not done:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and select > 0:
                 select = select - 1
+                pygame.mixer.Sound("Change.mp3").play()
             if event.key == pygame.K_DOWN and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
+                pygame.mixer.Sound("Change.mp3").play()
             if event.key == pygame.K_SPACE:
+               pygame.mixer.Sound("Selected.mp3").play()
                os.system("python ." + list_of_game_python_script[select][1:])
     SCREEN.blit(SCREEN_SURFACE, (0, 0))
     

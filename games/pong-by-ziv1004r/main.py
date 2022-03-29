@@ -54,7 +54,7 @@ clock = pygame.time.Clock()
 
 screen_width = 1280
 screen_height = 720
-screen = pygame.display.set_mode((screen_width,screen_height))
+screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 pygame.display.set_caption('Z-pong')
 
 
