@@ -9,6 +9,8 @@ RED = (255, 0, 0)
 select = 0
 
 pygame.mixer.init
+pygame.joystick.init()
+joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
 
 cwd = '.\games'
 
@@ -61,7 +63,7 @@ SCREEN_SURFACE = pygame.image.load(r".\BK.jpg")
 SCREEN_SURFACE = pygame.transform.scale(SCREEN_SURFACE, SIZE)
 
 # Loop until the user clicks the close button.
-done = False
+Done = False
 pygame.init()
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
@@ -90,11 +92,11 @@ for img_root in list_of_game_image_roots:
   
 
 # -------- Main Program Loop -----------
-while not done:
+while not Done:
     # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = True
+            Done = True
         # the selection mechanism which will be used to select a rectangle
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and select > 0:
@@ -106,6 +108,16 @@ while not done:
             if event.key == pygame.K_SPACE:
                pygame.mixer.Sound("Selected.mp3").play()
                os.system("python ." + list_of_game_python_script[select][1:])
+        elif event.type == pygame.JOYBUTTONDOWN:
+           pygame.mixer.Sound("Selected.mp3").play()
+           os.system("python ." + list_of_game_python_script[select][1:])
+        elif event.type == pygame.JOYAXISMOTION:
+            if event.axis == 1 and event.value <= -0.1:
+                  select = select + 1
+                  pygame.mixer.Sound("Change.mp3").play()
+            if event.axis == 1 and event.value > 0:
+                  select = select - 1
+                  pygame.mixer.Sound("Change.mp3").play()
     SCREEN.blit(SCREEN_SURFACE, (0, 0))
     
     
