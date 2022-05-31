@@ -1,7 +1,6 @@
 from numpy import size
 import pygame
 import os
-import playsound
 import cv2
 import  mediapipe as mp
 # Define some colors
@@ -14,10 +13,6 @@ mp_Hands = mp.solutions.hands
 hands = mp_Hands.Hands(max_num_hands=1)
 mpDraw = mp.solutions.drawing_utils
 
-orgX = 50, 80
-orgY = 50, 120
-orgHandPos = 50, 160
-orgTEXT = 50, 40
 vid = cv2.VideoCapture(0)
 neutral = True
 previous_frame_neutral = True
@@ -77,8 +72,8 @@ list_of_game_image_roots = list((get_game_image_roots()))
 
 # Set the width and height of the screen [width, height]
 
-SCREEN_WIDTH = 1680
-SCREEN_HEIGHT = 1000
+SCREEN_WIDTH = 1366
+SCREEN_HEIGHT = 768
 SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 SCREEN = pygame.display.set_mode(SIZE)
 
