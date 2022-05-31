@@ -148,16 +148,16 @@ while not Done:
             hand_height = "low"
         
         if enter_game and not previous_frame_entry and previous_frame_neutral:
-            playsound("./Selected.mp3")
+            pygame.mixer.Sound("./Selected.mp3").play()
             os.chdir(list_of_game_roots[select])
             os.system("python main.py")
             os.chdir("../..")
-        elif not neutral and hand_height == "high" and previous_frame_neutral:
+        elif not neutral and hand_height == "high" and previous_frame_neutral and select > 0:
                 select = select - 1
-                playsound("./Change.mp3")
-        elif not neutral and hand_height == "low" and previous_frame_neutral:
+                pygame.mixer.Sound("./Change.mp3").play()
+        elif not neutral and hand_height == "low" and previous_frame_neutral and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
-                playsound("./Change.mp3")
+                pygame.mixer.Sound("./Change.mp3").play()
         
         previous_frame_neutral = neutral
         previous_frame_entry = enter_game
@@ -168,27 +168,27 @@ while not Done:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and select > 0:
                 select = select - 1
-                playsound("./Change.mp3")
+                pygame.mixer.Sound("./Change.mp3").play()
             if event.key == pygame.K_DOWN and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
-                playsound("./Change.mp3")
+                pygame.mixer.Sound("./Change.mp3").play()
             if event.key == pygame.K_SPACE:
-                playsound("./Selected.mp3")
+                pygame.mixer.Sound("./Selected.mp3").play()
                 os.chdir(list_of_game_roots[select])
                 os.system("python main.py")
                 os.chdir("../..")
         if event.type == pygame.JOYBUTTONDOWN:
-            playsound("./Selected.mp3")
+            pygame.mixer.Sound("./Selected.mp3").play()
             os.chdir(list_of_game_roots[select])
             os.system("python main.py")
             os.chdir("../..")
         if event.type == pygame.JOYAXISMOTION:
             if event.axis == 1 and event.value <= -0.1 and select < len(TEXT_SURFACES) - 1:
                 select = select + 1
-                playsound("./Change.mp3")
+                pygame.mixer.Sound("./Change.mp3").play()
             if event.axis == 1 and event.value > 0 and select > 0:
                 select = select - 1
-                playsound("./Change.mp3")
+                pygame.mixer.Sound("./Change.mp3").play()
     SCREEN.blit(SCREEN_SURFACE, (0, 0))
     
     
